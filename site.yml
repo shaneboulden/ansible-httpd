@@ -1,0 +1,23 @@
+---
+- name: Deploy a basic httpd server
+  hosts: all
+  become: yes
+
+  tasks:
+   - name: install httpd
+     yum:
+       name: httpd
+       state: present
+
+   - name: template out the index page
+     template:
+       src: index.j2
+       dest: /var/www/html/index.html
+       mode: 0644
+       owner: root
+       group: root
+
+   - name: restart httpd
+     service:
+       name: httpd
+       state: restarted

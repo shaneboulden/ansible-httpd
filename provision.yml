@@ -1,0 +1,5 @@
+- name: Provision a server
+  hosts: all
+  tasks:
+    - name: start the server
+      shell: "pushd /home/sboulden/Demos/JP9711/tower-e8-demo/ && /usr/local/bin/vagrant up server --provision"
