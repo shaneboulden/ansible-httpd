@@ -9,7 +9,6 @@
        name: httpd
        state: present
 
-  
    - name: template out the index page
      template:
        src: index.j2
@@ -19,7 +18,7 @@
        group: root
 
    - name: start and enable firewalld
-     servce:
+     service:
        name: firewalld
        state: started
        enabled: yes
@@ -28,7 +27,6 @@
      firewalld:
        service: http
        state: enabled
-
 
    - name: restart httpd
      service:
