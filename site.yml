@@ -9,11 +9,7 @@
        name: httpd
        state: present
 
-   - name: add firewalld rules for httpd
-     firewalld:
-       service: http
-       state: enabled
-
+  
    - name: template out the index page
      template:
        src: index.j2
@@ -21,6 +17,18 @@
        mode: 0644
        owner: root
        group: root
+
+   - name: start and enable firewalld
+     servce:
+       name: firewalld
+       state: started
+       enabled: yes
+
+   - name: add firewalld rules for httpd
+     firewalld:
+       service: http
+       state: enabled
+
 
    - name: restart httpd
      service:
