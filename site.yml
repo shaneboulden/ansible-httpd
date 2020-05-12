@@ -9,6 +9,11 @@
        name: httpd
        state: present
 
+   - name: add firewalld rules for httpd
+     firewalld:
+       service: http
+       state: enabled
+
    - name: template out the index page
      template:
        src: index.j2
