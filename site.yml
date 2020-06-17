@@ -20,7 +20,7 @@
    - name: template out the web server files
      copy:
        src: w3_page_files
-       dest: /var/www/html/w3_page_files/
+       dest: /var/www/html/
        mode: 0755
        owner: root
        group: root
