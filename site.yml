@@ -4,10 +4,13 @@
   become: yes
 
   tasks:
-   - name: install httpd
+   - name: install httpd and firewalld
      yum:
-       name: httpd
+       name: "{{ item }}"
        state: present
+     loop:
+       - httpd
+       - firewalld
 
    - name: template out the index page
      template:
