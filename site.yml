@@ -5,7 +5,7 @@
 
   tasks:
    - name: install httpd and firewalld
-     yum:
+     ansible.builtin.yum:
        name: "{{ item }}"
        state: present
      loop:
@@ -13,7 +13,7 @@
        - firewalld
 
    - name: template out the index page
-     template:
+     ansible.builtin.template:
        src: index.j2
        dest: /var/www/html/index.html
        mode: 0644
@@ -21,7 +21,7 @@
        group: root
 
    - name: template out the web server files
-     copy:
+     ansible.builtin.copy:
        src: w3_page_files
        dest: /var/www/html/
        mode: 0755
@@ -29,17 +29,18 @@
        group: root
 
    - name: start and enable firewalld
-     service:
+     ansible.builtin.service:
        name: firewalld
        state: started
        enabled: yes
 
    - name: add firewalld rules for httpd
-     firewalld:
+     ansible.posix.firewalld:
        service: http
+       permanent: true
        state: enabled
 
    - name: restart httpd
-     service:
+     ansible.builtin.service:
        name: httpd
        state: restarted
