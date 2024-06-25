@@ -1,0 +1,19 @@
+---
+- name: Destroy a basic httpd server
+  hosts: all
+  become: yes
+
+  tasks:
+   - name: Remove the index page
+     ansible.builtin.file:
+       dest: /var/www/html/index.html
+       state: absent
+
+   - name: stop and disable firewalld and httpd
+     ansible.builtin.service:
+       name: "{{ item }}"
+       state: stopped
+       enabled: no
+     loop:
+      - httpd
+      - firewalld
