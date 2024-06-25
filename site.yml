@@ -37,7 +37,6 @@
    - name: add firewalld rules for httpd
      ansible.posix.firewalld:
        service: http
-       permanent: true
        state: enabled
 
    - name: restart httpd
